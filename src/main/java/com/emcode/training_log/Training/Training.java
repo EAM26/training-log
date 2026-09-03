@@ -17,7 +17,7 @@ public class Training {
     private Long id;
 
     private String name;
-    private String storageLocation;
+    private String csvPath;
     private LocalDateTime createdAt;
     private LocalDateTime dateTimeOfTraining;
     private SportType type;

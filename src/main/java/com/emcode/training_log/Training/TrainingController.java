@@ -1,9 +1,14 @@
 package com.emcode.training_log.Training;
 
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/training")
@@ -16,7 +21,13 @@ public class TrainingController {
     }
 
     @PostMapping
-    private Long createTraining(@RequestBody Training training) {
-        return trainingService.createTraining(training);
+    public ResponseEntity<TrainingResponse> createTraining(@Valid @RequestBody TrainingRequest request) {
+        TrainingResponse response = trainingService.createTraining(request);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(response.id())
+                .toUri();
+        return ResponseEntity.created(location).body(response);
     }
 }
