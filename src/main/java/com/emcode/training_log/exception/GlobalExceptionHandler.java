@@ -4,7 +4,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +16,13 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(RecordNotFoundException.class)
+    public ProblemDetail handleRecordNotFound(
+            RecordNotFoundException exception
+    ) {
+        return buildProblemDetail(HttpStatus.NOT_FOUND, "Record not found",exception.getMessage());
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleRequestValidation(
@@ -73,6 +79,18 @@ public class GlobalExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatus(status);
         problemDetail.setTitle(title);
         problemDetail.setProperty("errors", errors);
+
+        return problemDetail;
+    }
+
+    private ProblemDetail buildProblemDetail(
+            HttpStatus status,
+            String title,
+            String message
+    ) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(status);
+        problemDetail.setTitle(title);
+        problemDetail.setProperty("message", message);
 
         return problemDetail;
     }

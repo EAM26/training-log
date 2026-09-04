@@ -9,8 +9,9 @@ public record TrainingResponse(
         LocalDateTime createdAt,
         LocalDateTime dateTimeOfTraining,
         SportType type,
-        double speedAvg,
-        double distance,
-        int durationSeconds
+        // todo replace primitive numerical types for wrappers after validation in Training Model is complete
+        Double speedAvg,
+        Double distance,
+        Integer durationSeconds
 ) {
 }
