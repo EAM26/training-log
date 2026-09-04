@@ -7,6 +7,8 @@ import com.emcode.training_log.util.PolarCsvReader;
 import com.opencsv.CSVReader;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -20,6 +22,7 @@ public class TrainingService {
         this.trainingRepo = trainingRepo;
         this.mapper = mapper;
         this.reader = reader;
+
     }
 
     public TrainingResponse createTraining(TrainingRequest request) {
@@ -52,7 +55,11 @@ public class TrainingService {
     private void setMetaData(Training training, List<String[]> csvData) {
 //        String[] row0 = csvData.get(0);
         String[] row1 = csvData.get(1);
+        training.setName(row1[1] + ": " + row1[2] + "  " + row1[3]);
+        training.setDate(LocalDate.parse(row1[2]));
+        training.setTime(LocalTime.parse((row1[3])));
         training.setType(SportType.valueOf(row1[1]));
+
 
 
     }

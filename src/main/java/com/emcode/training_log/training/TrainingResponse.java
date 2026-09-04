@@ -1,17 +1,20 @@
 package com.emcode.training_log.training;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public record TrainingResponse(
         Long id,
         String name,
         String csvPath,
         LocalDateTime createdAt,
-        LocalDateTime dateTimeOfTraining,
+        LocalDate date,
+        LocalTime time,
         SportType type,
-        // todo replace primitive numerical types for wrappers after validation in Training Model is complete
         Double speedAvg,
         Double distance,
-        Integer durationSeconds
+        Integer durationSeconds,
+        Integer hrAvg
 ) {
 }

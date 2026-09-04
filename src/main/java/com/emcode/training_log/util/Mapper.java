@@ -12,7 +12,6 @@ public class Mapper {
 
     public Training trainingRequestToEntity(TrainingRequest req) {
         Training training = new Training();
-        training.setName(req.name());
         training.setCsvPath(req.csvPath());
         training.setCreatedAt(LocalDateTime.now());
         return training;
@@ -24,11 +23,13 @@ public class Mapper {
                 training.getName(),
                 training.getCsvPath(),
                 training.getCreatedAt(),
-                training.getDateTimeOfTraining(),
+                training.getDate(),
+                training.getTime(),
                 training.getType(),
                 training.getSpeedAvg(),
                 training.getDistance(),
-                training.getDurationSeconds()
+                training.getDurationSeconds(),
+                training.getHrAvg()
         );
     }
 }

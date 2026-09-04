@@ -8,7 +8,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -18,17 +20,19 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+
     private String name;
     @NotBlank
     private String csvPath;
     @NotNull
     private LocalDateTime createdAt;
-    private LocalDateTime dateTimeOfTraining;
+    private LocalDate date;
+    private LocalTime time;
     private SportType type;
     private Double speedAvg;
     private Double distance;
     private Integer durationSeconds;
+    private Integer hrAvg;
 
 
 
