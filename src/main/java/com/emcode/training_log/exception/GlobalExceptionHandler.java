@@ -1,5 +1,7 @@
 package com.emcode.training_log.exception;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,27 @@ public class GlobalExceptionHandler {
                 "Request validation failed",
                 errors);
 
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ProblemDetail handleConstraintViolation(
+            ConstraintViolationException exception
+    ) {
+        Map<String, String> errors = exception.getConstraintViolations()
+                .stream()
+                .collect(Collectors.toMap(
+                        violation -> violation.getPropertyPath().toString(),
+                        ConstraintViolation::getMessage,
+                        (first, second) -> first,
+                        LinkedHashMap:: new
+
+                ));
+
+        return buildProblemDetail(
+                HttpStatus.BAD_REQUEST,
+                "Constraint validation failed",
+                errors
+        );
     }
 
 
