@@ -1,4 +1,4 @@
-package com.emcode.training_log.Training;
+package com.emcode.training_log.training;
 
 import com.emcode.training_log.util.Mapper;
 import org.springframework.stereotype.Service;

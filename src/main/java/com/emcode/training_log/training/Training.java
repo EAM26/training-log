@@ -1,4 +1,4 @@
-package com.emcode.training_log.Training;
+package com.emcode.training_log.training;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

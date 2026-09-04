@@ -1,8 +1,8 @@
 package com.emcode.training_log.util;
 
-import com.emcode.training_log.Training.Training;
-import com.emcode.training_log.Training.TrainingRequest;
-import com.emcode.training_log.Training.TrainingResponse;
+import com.emcode.training_log.training.Training;
+import com.emcode.training_log.training.TrainingRequest;
+import com.emcode.training_log.training.TrainingResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
