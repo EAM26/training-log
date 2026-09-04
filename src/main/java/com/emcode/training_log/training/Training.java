@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,12 +22,13 @@ public class Training {
     private String name;
     @NotBlank
     private String csvPath;
+    @NotNull
     private LocalDateTime createdAt;
     private LocalDateTime dateTimeOfTraining;
     private SportType type;
-    private double speedAvg;
-    private double distance;
-    private int durationSeconds;
+    private Double speedAvg;
+    private Double distance;
+    private Integer durationSeconds;
 
 
 
