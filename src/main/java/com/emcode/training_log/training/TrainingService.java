@@ -1,6 +1,6 @@
 package com.emcode.training_log.training;
 
-import com.emcode.training_log.data_row.TrainingSample;
+import com.emcode.training_log.util.TrainingSample;
 import com.emcode.training_log.exception.RecordNotFoundException;
 import com.emcode.training_log.util.Mapper;
 import com.emcode.training_log.util.PolarCsvReader;
@@ -93,7 +93,7 @@ public class TrainingService {
         training.setName(row1[1] + ": " + row1[2] + "  " + row1[3]);
         training.setDate(LocalDate.parse(row1[2]));
         training.setTime(LocalTime.parse((row1[3])));
-        training.setType(SportType.valueOf(row1[1]));
+        training.setType(TrainingType.valueOf(row1[1]));
 
 
 

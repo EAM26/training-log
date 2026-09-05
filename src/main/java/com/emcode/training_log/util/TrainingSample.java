@@ -1,4 +1,4 @@
-package com.emcode.training_log.data_row;
+package com.emcode.training_log.util;
 
 public record TrainingSample(
         String timeAsString,

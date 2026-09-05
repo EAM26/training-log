@@ -1,6 +1,6 @@
 package com.emcode.training_log.training;
 
-import com.emcode.training_log.data_row.TrainingSample;
+import com.emcode.training_log.util.TrainingSample;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +27,7 @@ public class Training {
     private LocalDateTime createdAt;
     private LocalDate date;
     private LocalTime time;
-    private SportType type;
+    private TrainingType type;
     private Double speedAvg;
     private Double distance;
     private Integer durationSeconds;

@@ -11,7 +11,7 @@ public record TrainingResponse(
         LocalDateTime createdAt,
         LocalDate date,
         LocalTime time,
-        SportType type,
+        TrainingType type,
         Double speedAvg,
         Double distance,
         Integer durationSeconds,
