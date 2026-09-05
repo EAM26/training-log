@@ -1,9 +1,7 @@
 package com.emcode.training_log.training;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.emcode.training_log.data_row.TrainingSample;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -11,6 +9,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,6 +32,9 @@ public class Training {
     private Double distance;
     private Integer durationSeconds;
     private Integer hrAvg;
+
+    @Transient
+    private List<TrainingSample> trainingSamples;
 
 
 

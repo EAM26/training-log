@@ -1,10 +1,9 @@
 package com.emcode.training_log.training;
 
-import com.emcode.training_log.TrainingLogApplication;
+import com.emcode.training_log.data_row.TrainingSample;
 import com.emcode.training_log.exception.RecordNotFoundException;
 import com.emcode.training_log.util.Mapper;
 import com.emcode.training_log.util.PolarCsvReader;
-import com.opencsv.CSVReader;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -29,8 +28,44 @@ public class TrainingService {
         Training training = mapper.trainingRequestToEntity(request);
 
         List<String[]> csvData = reader.readData(request.csvPath());
+
         setMetaData(training, csvData);
+
+        training.setTrainingSamples(readDataRows(csvData));
+        setTrainingSummary(training);
+
         return mapper.trainingEntityToResponse(trainingRepo.save(training));
+    }
+
+    private void setTrainingSummary(Training training) {
+        training.setDistance(training.getTrainingSamples().getLast().distance());
+        training.setDurationSeconds(training.getTrainingSamples().size());
+
+        training.setSpeedAvg(training.getDistance()/ training.getDurationSeconds() * 3.6);
+
+        int totalHr = training.getTrainingSamples().stream().mapToInt(TrainingSample::hr).sum();
+        training.setHrAvg(totalHr/ training.getDurationSeconds());
+
+    }
+
+    private List<TrainingSample> readDataRows(List<String[]> csvData) {
+        return csvData
+                .stream()
+                .skip(3)
+                .map(this::mapDataRowToTrainingSample)
+                .toList();
+    }
+
+    private TrainingSample mapDataRowToTrainingSample(String[] row) {
+        return new TrainingSample(
+                row[1],
+                Integer.parseInt(row[2]),
+                Integer.parseInt(row[5]),
+                Integer.parseInt(row[6]),
+                Double.parseDouble(row[8]),
+                Double.parseDouble(row[9]),
+                Double.parseDouble(row[10])
+        );
     }
 
     public TrainingResponse getTraining(Long id) {
