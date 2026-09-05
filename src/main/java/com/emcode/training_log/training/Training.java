@@ -1,14 +1,15 @@
 package com.emcode.training_log.training;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.emcode.training_log.util.TrainingSample;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,17 +19,26 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+
     private String name;
     @NotBlank
     private String csvPath;
     @NotNull
     private LocalDateTime createdAt;
-    private LocalDateTime dateTimeOfTraining;
-    private SportType type;
+    private LocalDate date;
+    private LocalTime time;
+    private TrainingType type;
     private Double speedAvg;
+    private Double stride;
     private Double distance;
     private Integer durationSeconds;
+    private Integer hrAvg;
+    private Double temperatureAvg;
+    private Integer cadenceAvg;
+
+
+    @Transient
+    private List<TrainingSample> trainingSamples;
 
 
 
