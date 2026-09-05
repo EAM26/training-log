@@ -29,9 +29,13 @@ public class Training {
     private LocalTime time;
     private TrainingType type;
     private Double speedAvg;
+    private Double stride;
     private Double distance;
     private Integer durationSeconds;
     private Integer hrAvg;
+    private Double temperatureAvg;
+    private Integer cadenceAvg;
+
 
     @Transient
     private List<TrainingSample> trainingSamples;

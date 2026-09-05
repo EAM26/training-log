@@ -27,9 +27,12 @@ public class Mapper {
                 training.getTime(),
                 training.getType(),
                 training.getSpeedAvg(),
+                training.getStride(),
                 training.getDistance(),
                 training.getDurationSeconds(),
-                training.getHrAvg()
+                training.getHrAvg(),
+                training.getTemperatureAvg(),
+                training.getCadenceAvg()
         );
     }
 }

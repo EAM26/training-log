@@ -5,8 +5,10 @@ public record TrainingSample(
         Integer hr,
         Integer cadence,
         Integer altitude,
+        Double stride,
         Double distance,
         Double temperature,
         Double power
+
 ) {
 }

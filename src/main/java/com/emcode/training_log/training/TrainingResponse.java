@@ -13,8 +13,11 @@ public record TrainingResponse(
         LocalTime time,
         TrainingType type,
         Double speedAvg,
+        Double stride,
         Double distance,
         Integer durationSeconds,
-        Integer hrAvg
+        Integer hrAvg,
+        Double temperatureAvg,
+        Integer cadenceAvg
 ) {
 }

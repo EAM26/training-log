@@ -43,8 +43,12 @@ public class TrainingService {
 
         training.setSpeedAvg(training.getDistance()/ training.getDurationSeconds() * 3.6);
 
-        int totalHr = training.getTrainingSamples().stream().mapToInt(TrainingSample::hr).sum();
-        training.setHrAvg(totalHr/ training.getDurationSeconds());
+        int totalHrCol = training.getTrainingSamples().stream().mapToInt(TrainingSample::hr).sum();
+        training.setHrAvg(totalHrCol/ training.getDurationSeconds());
+        double totalTemperatureCol = training.getTrainingSamples().stream().mapToDouble(TrainingSample::temperature).sum();
+        training.setTemperatureAvg(totalTemperatureCol/ training.getDurationSeconds());
+        int totalCadenceCol = training.getTrainingSamples().stream().mapToInt(TrainingSample::cadence).sum();
+        training.setCadenceAvg(totalCadenceCol/ training.getDurationSeconds());
 
     }
 
@@ -62,6 +66,7 @@ public class TrainingService {
                 Integer.parseInt(row[2]),
                 Integer.parseInt(row[5]),
                 Integer.parseInt(row[6]),
+                parseNullableDouble(row[7]),
                 Double.parseDouble(row[8]),
                 Double.parseDouble(row[9]),
                 Double.parseDouble(row[10])
@@ -88,14 +93,17 @@ public class TrainingService {
 
 
     private void setMetaData(Training training, List<String[]> csvData) {
-//        String[] row0 = csvData.get(0);
         String[] row1 = csvData.get(1);
         training.setName(row1[1] + ": " + row1[2] + "  " + row1[3]);
         training.setDate(LocalDate.parse(row1[2]));
         training.setTime(LocalTime.parse((row1[3])));
         training.setType(TrainingType.valueOf(row1[1]));
+    }
 
-
-
+    private Double parseNullableDouble(String value) {
+        if(value == null || value.isBlank()) {
+            return null;
+        }
+        return Double.parseDouble(value);
     }
 }
